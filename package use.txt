@@ -1,0 +1,7 @@
+- npm create vite@latest
+- npm install
+- npm run dev
+
+- npm install react-router-dom
+- npm install swiper = carousell
+- npm install axios = data fetching API
