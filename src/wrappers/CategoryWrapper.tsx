@@ -13,7 +13,7 @@ export default function CategoryWrapper() {
     axios
       .get("http://127.0.0.1:8000/api/categories", {
         headers: {
-          "X-API-KEY": "sdfasget843r34hf223hfdsf",
+          "X-API-KEY": import.meta.env.VITE_API_KEY,
         },
       })
       .then((response) => {

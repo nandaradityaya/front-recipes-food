@@ -13,7 +13,7 @@ export default function BrowseFeatureRecipesWrapper() {
     axios
       .get("http://127.0.0.1:8000/api/recipes", {
         headers: {
-          "X-API-KEY": "sdfasget843r34hf223hfdsf", // gunakan API KEY pada header, karna di backend di pasang API KEY
+          "X-API-KEY": import.meta.env.VITE_API_KEY, // gunakan API KEY pada header, karna di backend di pasang API KEY
         },
       })
       .then((response) => {

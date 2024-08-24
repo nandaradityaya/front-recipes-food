@@ -32,7 +32,7 @@ export default function SearchDetails() {
         `http://127.0.0.1:8000/api/recipes/search?query=${query}`,
         {
           headers: {
-            "X-API-KEY": "sdfasget843r34hf223hfdsf",
+            "X-API-KEY": import.meta.env.VITE_API_KEY,
           },
         }
       );
