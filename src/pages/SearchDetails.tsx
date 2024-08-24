@@ -29,7 +29,12 @@ export default function SearchDetails() {
     setError(null);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/recipes/search?query=${query}`
+        `http://127.0.0.1:8000/api/recipes/search?query=${query}`,
+        {
+          headers: {
+            "X-API-KEY": "sdfasget843r34hf223hfdsf",
+          },
+        }
       );
       setSearchResults(response.data.data);
     } catch (error) {

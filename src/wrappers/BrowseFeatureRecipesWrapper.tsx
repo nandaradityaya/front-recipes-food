@@ -11,7 +11,11 @@ export default function BrowseFeatureRecipesWrapper() {
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/recipes")
+      .get("http://127.0.0.1:8000/api/recipes", {
+        headers: {
+          "X-API-KEY": "sdfasget843r34hf223hfdsf", // gunakan API KEY pada header, karna di backend di pasang API KEY
+        },
+      })
       .then((response) => {
         setRecipes(response.data.data);
         setLoading(false);

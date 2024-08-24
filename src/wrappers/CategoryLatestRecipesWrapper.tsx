@@ -12,7 +12,11 @@ export default function CategoryLatestRecipesWrapper() {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/category/${slug}`)
+      .get(`http://127.0.0.1:8000/api/category/${slug}`, {
+        headers: {
+          "X-API-KEY": "sdfasget843r34hf223hfdsf",
+        },
+      })
       .then((response) => {
         setCategory(response.data.data);
         setLoading(false);
