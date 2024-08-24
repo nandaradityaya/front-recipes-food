@@ -1,10 +1,24 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
-import CategoryCard from "../components/CategoryCard";
-import FeatureRecipeCard from "../components/FeatureRecipeCard";
+import React, { useState } from "react";
+import CategoryWrapper from "../wrappers/CategoryWrapper";
+import BrowseFeatureRecipesWrapper from "../wrappers/BrowseFeatureRecipesWrapper";
+import { useNavigate } from "react-router-dom";
 
 export default function Browse() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  // handle search form
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // masukan inputan ke params url
+  const handleSearch = () => {
+    if (searchQuery.length > 0) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
+
   return (
     <>
       <nav className="flex items-center justify-between px-5 mt-[30px]">
@@ -22,10 +36,7 @@ export default function Browse() {
         </a>
       </nav>
       <div id="SearchForm" className="px-5 mt-[30px]">
-        <form
-          action="search.html"
-          className="flex items-center rounded-full p-[5px_14px] pr-[5px] gap-[10px] bg-white shadow-[0_12px_30px_0_#D6D6D652] transition-all duration-300 focus-within:ring-1 focus-within:ring-[#FF4C1C]"
-        >
+        <div className="flex items-center rounded-full p-[5px_14px] pr-[5px] gap-[10px] bg-white shadow-[0_12px_30px_0_#D6D6D652] transition-all duration-300 focus-within:ring-1 focus-within:ring-[#FF4C1C]">
           <img
             src="/assets/images/icons/note-favorite.svg"
             className="w-6 h-6"
@@ -34,71 +45,24 @@ export default function Browse() {
           <input
             type="text"
             name="search"
+            value={searchQuery} // masukan value dari state
+            onChange={handleInputChange} // masukan inputan dari user
             id="search"
             className="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-black"
             placeholder="Find our best food recipes"
           />
-          <button type="submit" className=" flex shrink-0 w-[42px] h-[42px]">
+          <button
+            onClick={handleSearch}
+            className=" flex shrink-0 w-[42px] h-[42px]"
+          >
             <img src="/assets/images/icons/search.svg" alt="icon" />
           </button>
-        </form>
+        </div>
       </div>
-      <section id="Categories" className="mt-[30px]">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-bold">By Categories</h2>
-        </div>
-        <div className="swiper w-full mt-3">
-          <Swiper
-            className="w-full mt-3"
-            direction="horizontal"
-            spaceBetween={16}
-            slidesPerView="auto"
-            slidesOffsetBefore={20} // atur padding
-            slidesOffsetAfter={20} // atur padding
-          >
-            <SwiperSlide className="!w-fit pb-[30px]">
-              <CategoryCard />
-            </SwiperSlide>
-            <SwiperSlide className="!w-fit pb-[30px]">
-              <CategoryCard />
-            </SwiperSlide>
-            <SwiperSlide className="!w-fit pb-[30px]">
-              <CategoryCard />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </section>
-      <section id="MadeByPeople">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-bold">Made by People</h2>
-          <a
-            href="#"
-            className="font-semibold text-sm leading-[21px] text-[#FF4C1C]"
-          >
-            Explore All
-          </a>
-        </div>
-        <div className="swiper w-full mt-3">
-          <Swiper
-            className="w-full mt-3"
-            direction="horizontal"
-            spaceBetween={16}
-            slidesPerView="auto"
-            slidesOffsetBefore={20} // atur padding
-            slidesOffsetAfter={20} // atur padding
-          >
-            <SwiperSlide className="!w-fit">
-              <FeatureRecipeCard />
-            </SwiperSlide>
-            <SwiperSlide className="!w-fit">
-              <FeatureRecipeCard />
-            </SwiperSlide>
-            <SwiperSlide className="!w-fit">
-              <FeatureRecipeCard />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-      </section>
+
+      <CategoryWrapper />
+
+      <BrowseFeatureRecipesWrapper />
       <div
         id="BottomNav"
         className="fixed z-50 bottom-0 w-full max-w-[640px] mx-auto border-t border-[#E7E7E7] py-4 px-5 bg-white/70 backdrop-blur"

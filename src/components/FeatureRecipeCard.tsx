@@ -1,12 +1,14 @@
-import React from "react";
+import { Recipe } from "../types/type";
 
-export default function FeatureRecipeCard() {
+export default function FeatureRecipeCard({ recipe }: RecipeCardProps) {
+  const baseURL = "http://127.0.0.1:8000/storage/"; // untuk mengambil gambar
+
   return (
     <div>
-      <a href="details.html" className="card">
+      <div className="card">
         <div className="relative w-[200px] h-[280px] rounded-[30px] bg-white overflow-hidden">
           <img
-            src="/assets/images/thumbnails/thumbnail-1.png"
+            src={`${baseURL}/${recipe.thumbnail}`}
             className="absolute w-full h-full object-cover"
             alt="thumbnails"
           />
@@ -24,15 +26,19 @@ export default function FeatureRecipeCard() {
             </div>
             <div className="flex flex-col gap-[6px]">
               <h3 className="font-bold text-xl leading-[28px] text-white">
-                Orange Cake Masterpieces
+                {recipe.name}
               </h3>
               <p className="font-semibold text-xs leading-[18px] text-[#FF4C1C]">
-                Sweet
+                {recipe.category.name}
               </p>
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
+}
+
+interface RecipeCardProps {
+  recipe: Recipe;
 }
